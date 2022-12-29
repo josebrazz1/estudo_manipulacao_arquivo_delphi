@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2022/12/29 08:41:02.000.543,=C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2022/12/29 08:41:57.000.207,C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit1.pas</Transaction>
+    <Transaction>2022/12/29 08:41:57.000.207,C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit1.dfm</Transaction>
+    <Transaction>2022/12/29 08:41:59.000.761,C:\Users\José Augusto Braz\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Project1.dproj</Transaction>
+    <Transaction>2022/12/29 09:04:31.000.085,=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit2.pas</Transaction>
+    <Transaction>2022/12/29 09:27:57.000.970,=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit3.pas</Transaction>
+    <Transaction>2022/12/29 09:28:18.000.274,C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit3.pas=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Global.pas</Transaction>
+    <Transaction>2022/12/29 10:12:05.000.513,=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit3.pas</Transaction>
+    <Transaction>2022/12/29 10:12:29.000.772,C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit3.dfm=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\SearchPath.dfm</Transaction>
+    <Transaction>2022/12/29 10:12:29.000.772,C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\Unit3.pas=C:\Users\José Augusto Braz\Desktop\estudo_manipulacao_arquivo\SearchPath.pas</Transaction>
+  </Transactions>
+</BorlandProject>
