@@ -114,6 +114,8 @@ begin
 end;
 
 procedure TformEditFile.btnUpdtSaveClick(Sender: TObject);
+var
+  fileOpened : TextFile;
 begin
   try
     richTxt.Lines.SaveToFile(lblFileToUpdatePath.Caption);

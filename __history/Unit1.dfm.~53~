@@ -138,6 +138,7 @@ object formEditFile: TformEditFile
     ParentFont = False
     TabOrder = 6
     OnClick = Button1Click
+    ExplicitLeft = 320
   end
   object Button2: TButton
     Left = 362

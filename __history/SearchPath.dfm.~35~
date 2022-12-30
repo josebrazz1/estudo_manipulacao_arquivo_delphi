@@ -50,7 +50,7 @@ object formSearchPath: TformSearchPath
   end
   object btnOk: TButton
     Left = 8
-    Top = 229
+    Top = 228
     Width = 75
     Height = 25
     Caption = 'Ok'

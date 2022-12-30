@@ -114,9 +114,15 @@ begin
 end;
 
 procedure TformEditFile.btnUpdtSaveClick(Sender: TObject);
+var
+  formattedTxtToSave : TStringStream;
 begin
   try
-    richTxt.Lines.SaveToFile(lblFileToUpdatePath.Caption);
+    //richTxt.Lines.SaveToFile(lblFileToUpdatePath.Caption);
+
+    formattedTxtToSave := TStringStream.Create(richTxt.Lines);
+
+    richTxt.Lines.SaveToStream(formattedTxtToSave);
 
     ShowMessage(FILE_UPDATE_SUCCESS);
 

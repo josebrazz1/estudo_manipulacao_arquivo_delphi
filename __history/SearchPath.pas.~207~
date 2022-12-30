@@ -55,6 +55,8 @@ var
 begin
   if Owner.ToString = T_FORM_CREATE_FILE_NAME then
   begin
+
+    ShowMessage('');
     (Owner.FindComponent('txtPath') as TEdit).Text := txtFullPath.Text;
 
     ModalResult := mrOk;
@@ -123,7 +125,6 @@ var
   loadedFileName : string;
   loadedFileLine : string;
   loadedFileContent : string;
-  formattedText : TStringStream;
 begin
 try
       AssignFile(loadedFile, txtFullPath.Text);
@@ -136,10 +137,7 @@ try
         loadedFileContent := loadedFileContent + loadedFileLine + #13#10;
       end;
 
-      formattedText := TStringStream.Create(loadedFileContent);
-
-      //(Owner.FindComponent('richTxt') as TRichEdit).Lines.Text := loadedFileContent;
-      (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
+      (Owner.FindComponent('richTxt') as TRichEdit).Lines.Text := loadedFileContent;
       (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;
       (Owner.FindComponent('btnNew') as TButton).Visible := False;
       (Owner.FindComponent('lblFileToUpdatePath') as TLabel).Caption := txtFullPath.Text;

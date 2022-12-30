@@ -116,7 +116,7 @@ end;
 procedure TformEditFile.btnUpdtSaveClick(Sender: TObject);
 begin
   try
-    richTxt.Lines.SaveToFile(lblFileToUpdatePath.Caption);
+    richTxt.Lines.SaveToFile(lblFileToUpdatePath.Caption + '.RTF);
 
     ShowMessage(FILE_UPDATE_SUCCESS);
 

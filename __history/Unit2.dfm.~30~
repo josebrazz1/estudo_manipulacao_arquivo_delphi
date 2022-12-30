@@ -67,7 +67,7 @@ object formCreateFile: TformCreateFile
     Top = 8
     Width = 84
     Height = 21
-    Filter = 'All files (*.*)|*.*|txt (*.txt*)|*.txt*|RTF (*.RTF*)|*.RTF*'
+    Filter = 'All files (*.*)|*.*|txt (*.txt*)|*.txt*'
     TabOrder = 5
   end
 end

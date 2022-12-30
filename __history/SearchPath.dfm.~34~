@@ -50,7 +50,7 @@ object formSearchPath: TformSearchPath
   end
   object btnOk: TButton
     Left = 8
-    Top = 229
+    Top = 228
     Width = 75
     Height = 25
     Caption = 'Ok'
@@ -84,7 +84,7 @@ object formSearchPath: TformSearchPath
     Width = 150
     Height = 21
     FileList = flLB
-    Filter = 'All files (*.*)|*.*|txt (*.txt*)|*txt*|RTF(*.RTF*)|*RTF*'
+    Filter = 'All files (*.*)|*.*|txt (*.txt*)|*txt*'
     TabOrder = 6
   end
 end

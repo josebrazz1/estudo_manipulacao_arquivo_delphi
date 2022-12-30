@@ -43,6 +43,7 @@ end;
 procedure TformCreateFile.btnSaveClick(Sender: TObject);
 var
   fileFilter : string;
+  str : TStringStream;
 begin
   if txtFileName.Text = '' then
     txtFileName.Text := 'Novo arquivo';
@@ -58,8 +59,11 @@ begin
 
   fileFilter := StringReplace(ftrCB.Mask,'*','',[rfIgnoreCase, rfReplaceAll]);
   try
+    //(Owner.FindComponent('richTxt') as TRichEdit).Lines
+    //q.SaveToFile(txtPath.Text + '\' + txtFileName.Text + fileFilter);
+
     (Owner.FindComponent('richTxt') as TRichEdit).Lines
-    .SaveToFile(txtPath.Text + '\' + txtFileName.Text + fileFilter);
+    .SaveToStream(txtPath.Text + '\' + txtFileName.Text + fileFilter);
 
     ShowMessage(FILE_CREATE_SUCCESS_AT +
                 #13#10 + #13#10 +

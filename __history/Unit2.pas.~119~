@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.FileCtrl, Vcl.ComCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.FileCtrl;
 
 type
   TformCreateFile = class(TForm)
@@ -58,7 +58,7 @@ begin
 
   fileFilter := StringReplace(ftrCB.Mask,'*','',[rfIgnoreCase, rfReplaceAll]);
   try
-    (Owner.FindComponent('richTxt') as TRichEdit).Lines
+    (Owner.FindComponent('memText') as TMemo).Lines
     .SaveToFile(txtPath.Text + '\' + txtFileName.Text + fileFilter);
 
     ShowMessage(FILE_CREATE_SUCCESS_AT +
@@ -67,7 +67,7 @@ begin
 
     txtFileName.Text := '';
     txtPath.Text := '';
-    (Owner.FindComponent('richTxt') as TRichEdit).Lines.Clear;
+    (Owner.FindComponent('memText') as TMemo).Lines.Clear;
 
     ModalResult := mrOk;
     Release;

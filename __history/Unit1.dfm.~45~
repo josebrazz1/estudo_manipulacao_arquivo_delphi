@@ -3,7 +3,7 @@ object formEditFile: TformEditFile
   Top = 0
   Caption = 'Editar'
   ClientHeight = 331
-  ClientWidth = 457
+  ClientWidth = 384
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,7 +14,7 @@ object formEditFile: TformEditFile
   Position = poScreenCenter
   OnCreate = FormCreate
   DesignSize = (
-    457
+    384
     331)
   PixelsPerInch = 96
   TextHeight = 13
@@ -45,7 +45,7 @@ object formEditFile: TformEditFile
     ParentFont = False
   end
   object btnOpen: TButton
-    Left = 293
+    Left = 220
     Top = 301
     Width = 75
     Height = 25
@@ -54,10 +54,9 @@ object formEditFile: TformEditFile
     TabOrder = 0
     OnClick = btnOpenClick
     OnMouseEnter = btnOpenMouseEnter
-    ExplicitLeft = 220
   end
   object btnCancel: TButton
-    Left = 374
+    Left = 301
     Top = 301
     Width = 75
     Height = 25
@@ -65,7 +64,6 @@ object formEditFile: TformEditFile
     Caption = 'Cancelar'
     TabOrder = 1
     OnClick = btnCancelClick
-    ExplicitLeft = 301
   end
   object btnNew: TButton
     Left = 8
@@ -89,7 +87,7 @@ object formEditFile: TformEditFile
     OnClick = btnUpdtSaveClick
   end
   object btnCloseFile: TButton
-    Left = 424
+    Left = 351
     Top = 9
     Width = 25
     Height = 25
@@ -104,12 +102,11 @@ object formEditFile: TformEditFile
     TabOrder = 4
     OnClick = btnCloseFileClick
     OnMouseEnter = btnCloseFileMouseEnter
-    ExplicitLeft = 351
   end
   object richTxt: TRichEdit
     Left = 8
     Top = 40
-    Width = 441
+    Width = 368
     Height = 255
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
@@ -121,11 +118,10 @@ object formEditFile: TformEditFile
     ScrollBars = ssBoth
     TabOrder = 5
     Zoom = 100
-    ExplicitWidth = 368
   end
   object Button1: TButton
-    Left = 393
-    Top = 9
+    Left = 320
+    Top = 8
     Width = 25
     Height = 25
     Anchors = [akTop, akRight]
@@ -140,7 +136,7 @@ object formEditFile: TformEditFile
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 362
+    Left = 289
     Top = 9
     Width = 25
     Height = 25
@@ -154,14 +150,12 @@ object formEditFile: TformEditFile
     ParentFont = False
     TabOrder = 7
     OnClick = Button2Click
-    ExplicitLeft = 289
   end
   object Button3: TButton
-    Left = 331
+    Left = 258
     Top = 9
     Width = 25
     Height = 25
-    Anchors = [akTop, akRight]
     Caption = 'I'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -170,7 +164,5 @@ object formEditFile: TformEditFile
     Font.Style = [fsItalic]
     ParentFont = False
     TabOrder = 8
-    OnClick = Button3Click
-    ExplicitLeft = 258
   end
 end

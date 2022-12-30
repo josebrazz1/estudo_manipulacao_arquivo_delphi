@@ -118,6 +118,7 @@ object formEditFile: TformEditFile
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    PlainText = True
     ScrollBars = ssBoth
     TabOrder = 5
     Zoom = 100
@@ -138,6 +139,7 @@ object formEditFile: TformEditFile
     ParentFont = False
     TabOrder = 6
     OnClick = Button1Click
+    ExplicitLeft = 320
   end
   object Button2: TButton
     Left = 362

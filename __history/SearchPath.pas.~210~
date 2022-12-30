@@ -136,8 +136,6 @@ try
         loadedFileContent := loadedFileContent + loadedFileLine + #13#10;
       end;
 
-      formattedText := TStringStream.Create(loadedFileContent);
-
       //(Owner.FindComponent('richTxt') as TRichEdit).Lines.Text := loadedFileContent;
       (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
       (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;

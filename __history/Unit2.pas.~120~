@@ -58,7 +58,7 @@ begin
 
   fileFilter := StringReplace(ftrCB.Mask,'*','',[rfIgnoreCase, rfReplaceAll]);
   try
-    (Owner.FindComponent('richTxt') as TRichEdit).Lines
+    (Owner.FindComponent('richTxt') as ).Lines
     .SaveToFile(txtPath.Text + '\' + txtFileName.Text + fileFilter);
 
     ShowMessage(FILE_CREATE_SUCCESS_AT +
@@ -67,7 +67,7 @@ begin
 
     txtFileName.Text := '';
     txtPath.Text := '';
-    (Owner.FindComponent('richTxt') as TRichEdit).Lines.Clear;
+    (Owner.FindComponent('richTxt') as TMemo).Lines.Clear;
 
     ModalResult := mrOk;
     Release;
