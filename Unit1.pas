@@ -4,8 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, JvBaseDlg, JvJVCLAboutForm, Vcl.StdCtrls,
-  Vcl.ComCtrls, Vcl.Buttons;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, JvBaseDlg, JvJVCLAboutForm, Vcl.StdCtrls, inifiles,
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TformEditFile = class(TForm)
@@ -18,6 +18,9 @@ type
     btnBold: TButton;
     btnUnderline: TButton;
     btnItalic: TButton;
+    cbColor: TColorBox;
+    cbFont: TComboBox;
+    cbFontSize: TComboBox;
     procedure btnOpenClick(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -28,6 +31,10 @@ type
     procedure btnBoldClick(Sender: TObject);
     procedure btnUnderlineClick(Sender: TObject);
     procedure btnItalicClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure cbColorChange(Sender: TObject);
+    procedure cbFontChange(Sender: TObject);
+    procedure cbFontSizeChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,7 +48,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit2, SearchPath, Global;
+uses Unit2, SearchPath, Global, DefaultFolder;
 
 procedure TformEditFile.btnCancelClick(Sender: TObject);
 begin
@@ -87,8 +94,6 @@ end;
 
 procedure TformEditFile.btnOpenClick(Sender: TObject);
 var
-  fileTxt : file;
-  t : TStringList;
   formSearchPath : TformSearchPath;
 begin
   {AssignFile(fileTxt,'asdf');
@@ -121,6 +126,44 @@ begin
                 #13#10 + #13#10 +
                 'Motivo: ' + e.Message);
   end;
+end;
+
+procedure TformEditFile.cbColorChange(Sender: TObject);
+begin
+  richTxt.SelAttributes.Color := cbColor.Selected;
+end;
+
+procedure TformEditFile.cbFontChange(Sender: TObject);
+begin
+  richTxt.SelAttributes.Name := cbFont.Items[cbFont.ItemIndex];
+end;
+
+procedure TformEditFile.cbFontSizeChange(Sender: TObject);
+begin
+  richTxt.SelAttributes.Size := StrToInt(cbFontSize.Items[cbFontSize.ItemIndex]);
+end;
+
+procedure TformEditFile.FormCreate(Sender: TObject);
+var
+  formDefaultfolder : TformDefaultFolder;
+  iniFile : TIniFile;
+begin
+  iniFile := TIniFile.Create(ExtractFilePath(ParamStr(0)) + INI_FILE_NAME);
+
+  gDefaultFolder := iniFile.ReadString('application_default_folder','default_folder','');
+  gDontShowAgain := StrToBool(iniFile.ReadString('application_default_folder','dont_show_again', 'False'));
+  gDefaultFont := iniFile.ReadString('text_editor_properties','default_font','');
+
+  if (gDefaultFolder = '') and (not gDontShowAgain) then
+  begin
+    formDefaultfolder := TformDefaultFolder.Create(Self);
+    formDefaultfolder.ShowModal;
+  end;
+
+  //Alimenta a combobox de fontes
+  cbFont.Items := Screen.Fonts;
+  cbFont.ItemIndex := cbFont.Items.IndexOf(gDefaultFont);
+  richTxt.Font.Name := cbFont.Items[cbFont.ItemIndex];
 end;
 
 procedure TformEditFile.btnBoldClick(Sender: TObject);

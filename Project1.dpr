@@ -5,7 +5,8 @@ uses
   Unit1 in 'Unit1.pas' {formEditFile},
   Unit2 in 'Unit2.pas' {formCreateFile},
   Global in 'Global.pas',
-  SearchPath in 'SearchPath.pas' {formSearchPath};
+  SearchPath in 'SearchPath.pas' {formSearchPath},
+  DefaultFolder in 'DefaultFolder.pas' {formDefaultFolder};
 
 {$R *.res}
 

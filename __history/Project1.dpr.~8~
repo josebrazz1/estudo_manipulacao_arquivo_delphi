@@ -1,0 +1,19 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  Unit1 in 'Unit1.pas' {formEditFile},
+  Unit2 in 'Unit2.pas' {formCreateFile},
+  Global in 'Global.pas',
+  SearchPath in 'SearchPath.pas' {formSearchPath},
+  DefaultFolder in 'DefaultFolder.pas' {Form3};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TformEditFile, formEditFile);
+  Application.CreateForm(TForm3, Form3);
+  Application.Run;
+end.

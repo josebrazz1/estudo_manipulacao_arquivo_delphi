@@ -3,7 +3,7 @@ object formEditFile: TformEditFile
   Top = 0
   Caption = 'Novo'
   ClientHeight = 417
-  ClientWidth = 558
+  ClientWidth = 722
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,13 +12,14 @@ object formEditFile: TformEditFile
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
   DesignSize = (
-    558
+    722
     417)
   PixelsPerInch = 96
   TextHeight = 13
   object btnOpen: TButton
-    Left = 394
+    Left = 558
     Top = 387
     Width = 75
     Height = 25
@@ -27,11 +28,10 @@ object formEditFile: TformEditFile
     TabOrder = 0
     OnClick = btnOpenClick
     OnMouseEnter = btnOpenMouseEnter
-    ExplicitLeft = 220
-    ExplicitTop = 301
+    ExplicitLeft = 394
   end
   object btnCancel: TButton
-    Left = 475
+    Left = 639
     Top = 387
     Width = 75
     Height = 25
@@ -39,8 +39,7 @@ object formEditFile: TformEditFile
     Caption = 'Cancelar'
     TabOrder = 1
     OnClick = btnCancelClick
-    ExplicitLeft = 301
-    ExplicitTop = 301
+    ExplicitLeft = 475
   end
   object btnNew: TButton
     Left = 8
@@ -51,7 +50,6 @@ object formEditFile: TformEditFile
     Caption = 'Novo'
     TabOrder = 2
     OnClick = btnNewClick
-    ExplicitTop = 301
   end
   object btnUpdtSave: TButton
     Left = 8
@@ -63,10 +61,9 @@ object formEditFile: TformEditFile
     TabOrder = 3
     Visible = False
     OnClick = btnUpdtSaveClick
-    ExplicitTop = 301
   end
   object btnCloseFile: TButton
-    Left = 525
+    Left = 689
     Top = 9
     Width = 25
     Height = 25
@@ -81,12 +78,13 @@ object formEditFile: TformEditFile
     TabOrder = 4
     OnClick = btnCloseFileClick
     OnMouseEnter = btnCloseFileMouseEnter
+    ExplicitLeft = 525
   end
   object richTxt: TRichEdit
     Left = 8
-    Top = 40
-    Width = 542
-    Height = 341
+    Top = 65
+    Width = 706
+    Height = 316
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -100,7 +98,7 @@ object formEditFile: TformEditFile
   end
   object btnBold: TButton
     Left = 70
-    Top = 9
+    Top = 35
     Width = 25
     Height = 25
     Caption = 'N'
@@ -115,7 +113,7 @@ object formEditFile: TformEditFile
   end
   object btnUnderline: TButton
     Left = 39
-    Top = 9
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'U'
@@ -130,7 +128,7 @@ object formEditFile: TformEditFile
   end
   object btnItalic: TButton
     Left = 8
-    Top = 9
+    Top = 35
     Width = 25
     Height = 25
     Caption = 'I'
@@ -142,5 +140,46 @@ object formEditFile: TformEditFile
     ParentFont = False
     TabOrder = 8
     OnClick = btnItalicClick
+  end
+  object cbColor: TColorBox
+    Left = 101
+    Top = 37
+    Width = 100
+    Height = 22
+    TabOrder = 9
+    OnChange = cbColorChange
+  end
+  object cbFont: TComboBox
+    Left = 8
+    Top = 8
+    Width = 87
+    Height = 21
+    TabOrder = 10
+    OnChange = cbFontChange
+  end
+  object cbFontSize: TComboBox
+    Left = 101
+    Top = 8
+    Width = 50
+    Height = 21
+    TabOrder = 11
+    OnChange = cbFontSizeChange
+    Items.Strings = (
+      '8'
+      '9'
+      '10'
+      '11'
+      '12'
+      '14'
+      '16'
+      '18'
+      '20'
+      '22'
+      '24'
+      '26'
+      '28'
+      '36'
+      '48'
+      '72')
   end
 end

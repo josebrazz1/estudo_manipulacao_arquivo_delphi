@@ -91,6 +91,13 @@ begin
                   'Motivo: ' + e.Message);
     end;
     CloseFile(loadedFile);
+  end
+  else if Owner.ToString = T_FORM_DEFAULT_FOLDER_NAME then
+  begin
+    (Owner.FindComponent('txtDefaultFolder') as TEdit).Text := txtFullPath.Text;
+
+    ModalResult := mrOk;
+    Release;
   end;
 end;
 
@@ -170,12 +177,11 @@ end;
 procedure TformSearchPath.FormCreate(Sender: TObject);
 begin
   if Owner.ToString = T_FORM_CREATE_FILE_NAME then
-  begin
-    flLB.Visible := False;
-    //dirLBFilePath.Width := 468;
-  end
+    flLB.Visible := False
   else if Owner.ToString = T_FORM_EDIT_FILE_NAME then
-    flLB.Visible := True;
+    flLB.Visible := True
+  else if Owner.ToString = T_FORM_DEFAULT_FOLDER_NAME then
+    flLB.Visible := False
 end;
 
 end.

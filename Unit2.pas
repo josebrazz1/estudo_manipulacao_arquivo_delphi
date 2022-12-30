@@ -20,6 +20,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure txtFileNameMouseEnter(Sender: TObject);
     procedure txtFilePathMouseEnter(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -95,6 +96,11 @@ begin
   ModalResult := mrOk;
 
   Release;
+end;
+
+procedure TformCreateFile.FormCreate(Sender: TObject);
+begin
+  txtFilePath.Text := gDefaultFolder;
 end;
 
 procedure TformCreateFile.txtFileNameMouseEnter(Sender: TObject);

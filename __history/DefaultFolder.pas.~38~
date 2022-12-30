@@ -1,0 +1,58 @@
+unit DefaultFolder;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, inifiles;
+
+type
+  TformDefaultFolder = class(TForm)
+    txtDefaultFolder: TEdit;
+    btnOpenSearchPath: TButton;
+    btnOk: TButton;
+    Memo1: TMemo;
+    ckBoxDontShowAgain: TCheckBox;
+    procedure btnOpenSearchPathClick(Sender: TObject);
+    procedure btnOkClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  formDefaultFolder: TformDefaultFolder;
+
+implementation
+
+{$R *.dfm}
+
+uses Global, SearchPath;
+
+procedure TformDefaultFolder.btnOkClick(Sender: TObject);
+var
+  iniFile : TIniFile;
+begin
+  iniFile := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'InicializationFile.ini');
+
+  if ckBoxDontShowAgain.Checked then
+    iniFile.WriteString('application_default_folder','dont_show_again','True')
+  else
+  begin
+    iniFile.WriteString('application_default_folder','default_folder',txtDefaultFolder.Text);
+  end;
+
+  ModalResult := mrOk;
+  Release;
+end;
+
+procedure TformDefaultFolder.btnOpenSearchPathClick(Sender: TObject);
+var
+  formSearchPath : TformSearchPath;
+begin
+  formSearchPath := TformSearchPath.Create(Self);
+  formSearchPath.ShowModal;
+end;
+
+end.

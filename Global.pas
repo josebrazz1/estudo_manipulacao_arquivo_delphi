@@ -2,6 +2,15 @@ unit Global;
 
 interface
 
+var
+  //Variáveis globais do arquivo "InitializationFile.ini"
+  //[application_default_folder]
+  gDefaultFolder : string;
+  gDontShowAgain : Boolean;
+  //[text_editor_properties]
+  gDefaultFont : string;
+
+
 const
   {Mensagens}
   FILE_CREATE_SUCCESS_AT  : string = 'Arquivo criado com sucesso em: ';
@@ -24,8 +33,12 @@ const
   HINT_ENTER_FILE_PATH    : string = 'Informe o caminho onde o arquivo será salvo.';
 
   {Forms}
-  T_FORM_EDIT_FILE_NAME     : string = 'TformEditFile';
-  T_FORM_CREATE_FILE_NAME   : string = 'TformCreateFile';
+  T_FORM_EDIT_FILE_NAME       : string = 'TformEditFile';
+  T_FORM_CREATE_FILE_NAME     : string = 'TformCreateFile';
+  T_FORM_DEFAULT_FOLDER_NAME  : string = 'TformDefaultFolder';
+
+  {Nome de arquivo INI}
+  INI_FILE_NAME               : string = 'InitializationFile.ini';
 
 implementation
 
