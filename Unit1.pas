@@ -35,6 +35,7 @@ type
     procedure cbColorChange(Sender: TObject);
     procedure cbFontChange(Sender: TObject);
     procedure cbFontSizeChange(Sender: TObject);
+    procedure richTxtSelectionChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -148,11 +149,15 @@ var
   formDefaultfolder : TformDefaultFolder;
   iniFile : TIniFile;
 begin
+  {Abre ou cria o arquivo ini}
   iniFile := TIniFile.Create(ExtractFilePath(ParamStr(0)) + INI_FILE_NAME);
 
+  {Lê as definições de inicialização contidas no arquivo ini e alimenta as variáveis
+  globais}
   gDefaultFolder := iniFile.ReadString('application_default_folder','default_folder','');
   gDontShowAgain := StrToBool(iniFile.ReadString('application_default_folder','dont_show_again', 'False'));
   gDefaultFont := iniFile.ReadString('text_editor_properties','default_font','');
+  gDefaultFontSize := iniFile.ReadInteger('text_editor_properties','default_font_size',0);
 
   if (gDefaultFolder = '') and (not gDontShowAgain) then
   begin
@@ -162,8 +167,33 @@ begin
 
   //Alimenta a combobox de fontes
   cbFont.Items := Screen.Fonts;
+  {Define o estilo de fonte padrão}
   cbFont.ItemIndex := cbFont.Items.IndexOf(gDefaultFont);
   richTxt.Font.Name := cbFont.Items[cbFont.ItemIndex];
+  {Define o tamanho de fonte padrão}
+  cbFontSize.ItemIndex := cbFontSize.Items.IndexOf(IntToStr(gDefaultFontSize));
+  richTxt.Font.Size := StrToInt(cbFontSize.Items[cbFontSize.ItemIndex]);
+end;
+
+procedure TformEditFile.richTxtSelectionChange(Sender: TObject);
+begin
+  {Verifica o estilo do texto selecionado e atualiza  o estado dos botões}
+  if fsBold in richTxt.SelAttributes.Style then
+    btnBold.Font.Style := btnBold.Font.Style + [fsBold]
+  else
+    btnBold.Font.Style := btnBold.Font.Style - [fsBold];
+
+  if fsItalic in richTxt.SelAttributes.Style then
+    btnItalic.Font.Style := btnItalic.Font.Style + [fsItalic]
+  else
+    btnItalic.Font.Style := btnItalic.Font.Style - [fsItalic];
+
+  if fsUnderline in richTxt.SelAttributes.Style then
+    btnUnderline.Font.Style := btnUnderline.Font.Style + [fsUnderline]
+  else
+    btnUnderline.Font.Style := btnUnderline.Font.Style - [fsUnderline];
+
+
 end;
 
 procedure TformEditFile.btnBoldClick(Sender: TObject);

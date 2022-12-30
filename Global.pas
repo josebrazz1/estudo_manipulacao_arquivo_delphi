@@ -8,8 +8,8 @@ var
   gDefaultFolder : string;
   gDontShowAgain : Boolean;
   //[text_editor_properties]
-  gDefaultFont : string;
-
+  gDefaultFont      : string;
+  gDefaultFontSize  : Integer;
 
 const
   {Mensagens}

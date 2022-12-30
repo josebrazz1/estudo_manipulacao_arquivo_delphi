@@ -64,7 +64,7 @@ object formEditFile: TformEditFile
   end
   object btnCloseFile: TButton
     Left = 689
-    Top = 9
+    Top = 34
     Width = 25
     Height = 25
     Anchors = [akTop, akRight]
@@ -78,13 +78,12 @@ object formEditFile: TformEditFile
     TabOrder = 4
     OnClick = btnCloseFileClick
     OnMouseEnter = btnCloseFileMouseEnter
-    ExplicitLeft = 525
   end
   object richTxt: TRichEdit
     Left = 8
-    Top = 40
+    Top = 66
     Width = 706
-    Height = 341
+    Height = 316
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -95,11 +94,11 @@ object formEditFile: TformEditFile
     ScrollBars = ssBoth
     TabOrder = 5
     Zoom = 100
-    ExplicitWidth = 542
+    OnSelectionChange = richTxtSelectionChange
   end
   object btnBold: TButton
     Left = 70
-    Top = 9
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'N'
@@ -114,7 +113,7 @@ object formEditFile: TformEditFile
   end
   object btnUnderline: TButton
     Left = 39
-    Top = 9
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'U'
@@ -129,7 +128,7 @@ object formEditFile: TformEditFile
   end
   object btnItalic: TButton
     Left = 8
-    Top = 9
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'I'
@@ -144,17 +143,43 @@ object formEditFile: TformEditFile
   end
   object cbColor: TColorBox
     Left = 101
-    Top = 12
+    Top = 36
     Width = 100
     Height = 22
     TabOrder = 9
     OnChange = cbColorChange
   end
   object cbFont: TComboBox
-    Left = 207
-    Top = 13
-    Width = 100
+    Left = 8
+    Top = 8
+    Width = 87
     Height = 21
     TabOrder = 10
+    OnChange = cbFontChange
+  end
+  object cbFontSize: TComboBox
+    Left = 101
+    Top = 8
+    Width = 52
+    Height = 21
+    TabOrder = 11
+    OnChange = cbFontSizeChange
+    Items.Strings = (
+      '8'
+      '9'
+      '10'
+      '11'
+      '12'
+      '14'
+      '16'
+      '18'
+      '20'
+      '22'
+      '24'
+      '26'
+      '28'
+      '36'
+      '48'
+      '72')
   end
 end
