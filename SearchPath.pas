@@ -55,7 +55,7 @@ var
 begin
   if Owner.ToString = T_FORM_CREATE_FILE_NAME then
   begin
-    (Owner.FindComponent('txtPath') as TEdit).Text := txtFullPath.Text;
+    (Owner.FindComponent('txtFilePath') as TEdit).Text := txtFullPath.Text;
 
     ModalResult := mrOk;
 
@@ -80,8 +80,7 @@ begin
       (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
       (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;
       (Owner.FindComponent('btnNew') as TButton).Visible := False;
-      (Owner.FindComponent('lblFileToUpdatePath') as TLabel).Caption := txtFullPath.Text;
-      (Owner.FindComponent('lblFileOpened') as TLabel).Visible := True;
+      (Owner as TForm).Caption := txtFullPath.Text;
 
       ModalResult := mrOk;
       Release;
@@ -113,8 +112,8 @@ begin
 
   txtFullPath.Text := dirLBFilePath.Directory + '\' + slctFile;
 
-  (Owner.FindComponent('lblFileOpened') as TLabel).Visible := False;
-  (Owner.FindComponent('lblFileOpened') as TLabel).Caption := EDITING_FILE + slctFile;
+  //(Owner.FindComponent('lblFileOpened') as TLabel).Visible := False;
+  //(Owner.FindComponent('lblFileOpened') as TLabel).Caption := EDITING_FILE + slctFile;
 end;
 
 procedure TformSearchPath.flLBDblClick(Sender: TObject);
@@ -142,8 +141,7 @@ try
       (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
       (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;
       (Owner.FindComponent('btnNew') as TButton).Visible := False;
-      (Owner.FindComponent('lblFileToUpdatePath') as TLabel).Caption := txtFullPath.Text;
-      (Owner.FindComponent('lblFileOpened') as TLabel).Visible := True;
+      (Owner as TForm).Caption := txtFullPath.Text;
 
       ModalResult := mrOk;
       Release;

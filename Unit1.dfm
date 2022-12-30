@@ -1,9 +1,9 @@
 object formEditFile: TformEditFile
   Left = 0
   Top = 0
-  Caption = 'Editar'
-  ClientHeight = 331
-  ClientWidth = 457
+  Caption = 'Novo'
+  ClientHeight = 417
+  ClientWidth = 558
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,41 +12,14 @@ object formEditFile: TformEditFile
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnCreate = FormCreate
   DesignSize = (
-    457
-    331)
+    558
+    417)
   PixelsPerInch = 96
   TextHeight = 13
-  object lblFileOpened: TLabel
-    Left = 8
-    Top = 8
-    Width = 95
-    Height = 13
-    Caption = 'Nome do arquivo'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object lblFileToUpdatePath: TLabel
-    Left = 8
-    Top = 23
-    Width = 84
-    Height = 11
-    Caption = 'Caminho do arquivo'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -9
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-  end
   object btnOpen: TButton
-    Left = 293
-    Top = 301
+    Left = 394
+    Top = 387
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -55,10 +28,11 @@ object formEditFile: TformEditFile
     OnClick = btnOpenClick
     OnMouseEnter = btnOpenMouseEnter
     ExplicitLeft = 220
+    ExplicitTop = 301
   end
   object btnCancel: TButton
-    Left = 374
-    Top = 301
+    Left = 475
+    Top = 387
     Width = 75
     Height = 25
     Anchors = [akRight, akBottom]
@@ -66,20 +40,22 @@ object formEditFile: TformEditFile
     TabOrder = 1
     OnClick = btnCancelClick
     ExplicitLeft = 301
+    ExplicitTop = 301
   end
   object btnNew: TButton
     Left = 8
-    Top = 301
+    Top = 387
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = 'Novo'
     TabOrder = 2
     OnClick = btnNewClick
+    ExplicitTop = 301
   end
   object btnUpdtSave: TButton
     Left = 8
-    Top = 301
+    Top = 387
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -87,9 +63,10 @@ object formEditFile: TformEditFile
     TabOrder = 3
     Visible = False
     OnClick = btnUpdtSaveClick
+    ExplicitTop = 301
   end
   object btnCloseFile: TButton
-    Left = 424
+    Left = 525
     Top = 9
     Width = 25
     Height = 25
@@ -104,13 +81,12 @@ object formEditFile: TformEditFile
     TabOrder = 4
     OnClick = btnCloseFileClick
     OnMouseEnter = btnCloseFileMouseEnter
-    ExplicitLeft = 351
   end
   object richTxt: TRichEdit
     Left = 8
     Top = 40
-    Width = 441
-    Height = 255
+    Width = 542
+    Height = 341
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -121,56 +97,50 @@ object formEditFile: TformEditFile
     ScrollBars = ssBoth
     TabOrder = 5
     Zoom = 100
-    ExplicitWidth = 368
   end
-  object Button1: TButton
-    Left = 393
+  object btnBold: TButton
+    Left = 70
     Top = 9
     Width = 25
     Height = 25
-    Anchors = [akTop, akRight]
     Caption = 'N'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = [fsBold]
+    Font.Style = []
     ParentFont = False
     TabOrder = 6
-    OnClick = Button1Click
+    OnClick = btnBoldClick
   end
-  object Button2: TButton
-    Left = 362
+  object btnUnderline: TButton
+    Left = 39
     Top = 9
     Width = 25
     Height = 25
-    Anchors = [akTop, akRight]
     Caption = 'U'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = [fsUnderline]
+    Font.Style = []
     ParentFont = False
     TabOrder = 7
-    OnClick = Button2Click
-    ExplicitLeft = 289
+    OnClick = btnUnderlineClick
   end
-  object Button3: TButton
-    Left = 331
+  object btnItalic: TButton
+    Left = 8
     Top = 9
     Width = 25
     Height = 25
-    Anchors = [akTop, akRight]
     Caption = 'I'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = [fsItalic]
+    Font.Style = []
     ParentFont = False
     TabOrder = 8
-    OnClick = Button3Click
-    ExplicitLeft = 258
+    OnClick = btnItalicClick
   end
 end

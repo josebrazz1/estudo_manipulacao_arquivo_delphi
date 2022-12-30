@@ -5,32 +5,29 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, JvBaseDlg, JvJVCLAboutForm, Vcl.StdCtrls,
-  Vcl.ComCtrls;
+  Vcl.ComCtrls, Vcl.Buttons;
 
 type
   TformEditFile = class(TForm)
     btnOpen: TButton;
-    lblFileOpened: TLabel;
     btnCancel: TButton;
     btnNew: TButton;
     btnUpdtSave: TButton;
-    lblFileToUpdatePath: TLabel;
     btnCloseFile: TButton;
     richTxt: TRichEdit;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
+    btnBold: TButton;
+    btnUnderline: TButton;
+    btnItalic: TButton;
     procedure btnOpenClick(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure btnUpdtSaveClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure btnCloseFileClick(Sender: TObject);
     procedure btnCloseFileMouseEnter(Sender: TObject);
     procedure btnOpenMouseEnter(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure btnBoldClick(Sender: TObject);
+    procedure btnUnderlineClick(Sender: TObject);
+    procedure btnItalicClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -53,13 +50,12 @@ end;
 
 procedure TformEditFile.btnCloseFileClick(Sender: TObject);
 begin
-  lblFileOpened.Caption := '';
-  lblFileToUpdatePath.Caption := '';
-
   richTxt.Lines.Create.Clear;
 
   btnUpdtSave.Visible := False;
   btnNew.Visible := True;
+
+  Self.Caption := 'Novo';
 end;
 
 procedure TformEditFile.btnCloseFileMouseEnter(Sender: TObject);
@@ -116,7 +112,7 @@ end;
 procedure TformEditFile.btnUpdtSaveClick(Sender: TObject);
 begin
   try
-    richTxt.Lines.SaveToFile(lblFileToUpdatePath.Caption);
+    richTxt.Lines.SaveToFile(Self.Caption);
 
     ShowMessage(FILE_UPDATE_SUCCESS);
 
@@ -127,34 +123,43 @@ begin
   end;
 end;
 
-procedure TformEditFile.Button1Click(Sender: TObject);
+procedure TformEditFile.btnBoldClick(Sender: TObject);
 begin
+  if fsBold in btnBold.Font.Style then
+    btnBold.Font.Style := btnBold.Font.Style - [fsBold]
+  else
+    btnBold.Font.Style := btnBold.Font.Style + [fsBold];
+
   if fsBold in richTxt.SelAttributes.Style then
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style - [fsBold]
   else
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style + [fsBold];
 end;
 
-procedure TformEditFile.Button2Click(Sender: TObject);
+procedure TformEditFile.btnUnderlineClick(Sender: TObject);
 begin
+  if fsUnderline in btnUnderline.Font.Style then
+    btnUnderline.Font.Style := btnUnderline.Font.Style - [fsUnderline]
+  else
+    btnUnderline.Font.Style := btnUnderline.Font.Style + [fsUnderline];
+
   if fsUnderline in richTxt.SelAttributes.Style then
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style - [fsUnderline]
   else
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style + [fsUnderline];
 end;
 
-procedure TformEditFile.Button3Click(Sender: TObject);
+procedure TformEditFile.btnItalicClick(Sender: TObject);
 begin
+  if fsItalic in btnItalic.Font.Style then
+    btnItalic.Font.Style := btnItalic.Font.Style - [fsItalic]
+  else
+    btnItalic.Font.Style := btnItalic.Font.Style + [fsItalic];
+
   if fsItalic in richTxt.SelAttributes.Style then
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style - [fsItalic]
   else
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style + [fsItalic];
-end;
-
-procedure TformEditFile.FormCreate(Sender: TObject);
-begin
-  lblFileOpened.Caption := '';
-  lblFileToUpdatePath.Caption := '';
 end;
 
 end.

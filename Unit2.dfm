@@ -26,14 +26,16 @@ object formCreateFile: TformCreateFile
     Height = 21
     TabOrder = 0
     TextHint = 'Nome do arquivo'
+    OnMouseEnter = txtFileNameMouseEnter
   end
-  object txtPath: TEdit
+  object txtFilePath: TEdit
     Left = 8
     Top = 35
     Width = 318
     Height = 21
     TabOrder = 1
     TextHint = 'Caminho do arquivo'
+    OnMouseEnter = txtFilePathMouseEnter
   end
   object Button1: TButton
     Left = 332

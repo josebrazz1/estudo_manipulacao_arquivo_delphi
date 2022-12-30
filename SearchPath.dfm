@@ -5,8 +5,6 @@ object formSearchPath: TformSearchPath
   ClientHeight = 261
   ClientWidth = 484
   Color = clBtnFace
-  Constraints.MaxHeight = 300
-  Constraints.MaxWidth = 500
   Constraints.MinHeight = 300
   Constraints.MinWidth = 500
   Font.Charset = DEFAULT_CHARSET
@@ -46,6 +44,7 @@ object formSearchPath: TformSearchPath
     Top = 8
     Width = 372
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 2
   end
   object btnOk: TButton
@@ -53,6 +52,7 @@ object formSearchPath: TformSearchPath
     Top = 229
     Width = 75
     Height = 25
+    Anchors = [akLeft, akBottom]
     Caption = 'Ok'
     TabOrder = 3
     OnClick = btnOkClick
@@ -62,6 +62,7 @@ object formSearchPath: TformSearchPath
     Top = 229
     Width = 75
     Height = 25
+    Anchors = [akLeft, akBottom]
     Caption = 'Cancelar'
     TabOrder = 4
     OnClick = btnCancelClick
@@ -71,7 +72,7 @@ object formSearchPath: TformSearchPath
     Top = 33
     Width = 150
     Height = 190
-    Anchors = [akLeft, akTop, akRight, akBottom]
+    Anchors = [akTop, akRight, akBottom]
     ItemHeight = 13
     TabOrder = 5
     OnClick = flLBClick
@@ -80,11 +81,12 @@ object formSearchPath: TformSearchPath
   end
   object FilterComboBox1: TFilterComboBox
     Left = 326
-    Top = 229
+    Top = 231
     Width = 150
     Height = 21
+    Anchors = [akRight, akBottom]
     FileList = flLB
-    Filter = 'All files (*.*)|*.*|txt (*.txt*)|*txt*|RTF(*.RTF*)|*RTF*'
+    Filter = 'All files (*.*)|*.*|txt (*.txt*)|*.txt*|RTF (*.RTF*)|*.RTF*'
     TabOrder = 6
   end
 end

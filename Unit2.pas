@@ -9,7 +9,7 @@ uses
 type
   TformCreateFile = class(TForm)
     txtFileName: TEdit;
-    txtPath: TEdit;
+    txtFilePath: TEdit;
     Button1: TButton;
     btnSave: TButton;
     btnCancel: TButton;
@@ -18,6 +18,8 @@ type
     procedure btnCancelClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Button1Click(Sender: TObject);
+    procedure txtFileNameMouseEnter(Sender: TObject);
+    procedure txtFilePathMouseEnter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,11 +46,13 @@ procedure TformCreateFile.btnSaveClick(Sender: TObject);
 var
   fileFilter : string;
 begin
+  fileFilter := StringReplace(ftrCB.Mask,'*','',[rfIgnoreCase, rfReplaceAll]);
+
   if txtFileName.Text = '' then
     txtFileName.Text := 'Novo arquivo';
 
   {Checa se o arquivo existe no diretório}
-  if FileExists(txtPath.Text + '\' + txtFileName.Text) then
+  if FileExists(txtFilePath.Text + '\' + txtFileName.Text + fileFilter) then
   begin
     {Caso existe, pergunta se deseja sobrescrever o arquivo existente}
     if MessageDlg(FILE_ALREADY_EXISTS, mtConfirmation, [mbYes, mbNo], 0) = mrNo then
@@ -56,17 +60,16 @@ begin
       Exit;
   end;
 
-  fileFilter := StringReplace(ftrCB.Mask,'*','',[rfIgnoreCase, rfReplaceAll]);
   try
     (Owner.FindComponent('richTxt') as TRichEdit).Lines
-    .SaveToFile(txtPath.Text + '\' + txtFileName.Text + fileFilter);
+    .SaveToFile(txtFilePath.Text + '\' + txtFileName.Text + fileFilter);
 
     ShowMessage(FILE_CREATE_SUCCESS_AT +
                 #13#10 + #13#10 +
-                txtPath.Text + '\' + txtFileName.Text + fileFilter);
+                txtFilePath.Text + '\' + txtFileName.Text + fileFilter);
 
     txtFileName.Text := '';
-    txtPath.Text := '';
+    txtFilePath.Text := '';
     (Owner.FindComponent('richTxt') as TRichEdit).Lines.Clear;
 
     ModalResult := mrOk;
@@ -92,6 +95,18 @@ begin
   ModalResult := mrOk;
 
   Release;
+end;
+
+procedure TformCreateFile.txtFileNameMouseEnter(Sender: TObject);
+begin
+  txtFileName.ShowHint := True;
+  txtFileName.Hint := HINT_ENTER_FILE_NAME;
+end;
+
+procedure TformCreateFile.txtFilePathMouseEnter(Sender: TObject);
+begin
+  txtFilePath.ShowHint := True;
+  txtFilePath.Hint := HINT_ENTER_FILE_PATH;
 end;
 
 end.

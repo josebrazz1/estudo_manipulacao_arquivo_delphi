@@ -11,11 +11,17 @@ const
   EDITING_FILE            : string = 'Arquivo aberto: ';
   FILE_UPDATE_SUCCESS     : string = 'Arquivo alterado com sucesso!';
   FILE_UPDATE_ERROR       : string = 'Erro ao alterar o arquivo!';
-  FILE_EMPTY              : string = 'O arquivo não possui nenhum conteúdo, deseja continuar mesmo assim?';
+  FILE_EMPTY              : string = 'O arquivo não possui nenhum conteúdo, deseja salvá-lo mesmo assim?';
 
+  {Mensagens que aperecem em hints de componentes}
   HINT_CLOSE_FILE         : string = 'Fechar o arquivo em manipulação';
   HINT_OPEN_EXISTING_FILE : string = 'Abrir arquivo existente';
   HINT_OPEN_SELECTED_FILE : string = 'Selecione um arquivo para abrir';
+  HINT_ENTER_FILE_NAME    : string = 'Digite um nome para o arquivo.' +
+                                      #13#10 +
+                                      #13#10 +
+                                      'Se deixar vazio o arquivo será salvo como "Novo Arquivo".';
+  HINT_ENTER_FILE_PATH    : string = 'Informe o caminho onde o arquivo será salvo.';
 
   {Forms}
   T_FORM_EDIT_FILE_NAME     : string = 'TformEditFile';

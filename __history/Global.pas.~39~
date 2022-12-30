@@ -1,0 +1,30 @@
+unit Global;
+
+interface
+
+const
+  {Mensagens}
+  FILE_CREATE_SUCCESS_AT  : string = 'Arquivo criado com sucesso em: ';
+  FILE_CREATE_ERROR       : string = 'Erro ao criar o arquivo!';
+  FILE_ALREADY_EXISTS     : string = 'O arquivo já existe, deseja sobrescrever?';
+  NOT_ABLE_TO_OPEN_FILE   : string = 'Erro ao abrir o arquivo!';
+  EDITING_FILE            : string = 'Arquivo aberto: ';
+  FILE_UPDATE_SUCCESS     : string = 'Arquivo alterado com sucesso!';
+  FILE_UPDATE_ERROR       : string = 'Erro ao alterar o arquivo!';
+  FILE_EMPTY              : string = 'O arquivo não possui nenhum conteúdo, deseja salvá-lo mesmo assim?';
+
+  HINT_CLOSE_FILE         : string = 'Fechar o arquivo em manipulação';
+  HINT_OPEN_EXISTING_FILE : string = 'Abrir arquivo existente';
+  HINT_OPEN_SELECTED_FILE : string = 'Selecione um arquivo para abrir';
+  HINT_ENTER_FILE_NAME    : string = 'Digite um nome para o arquivo.' +
+                                      #13#10 +
+                                      #13#10 +
+                                      'Se deixar vazio o arquivo será salvo como "Novo Arquivo".';
+
+  {Forms}
+  T_FORM_EDIT_FILE_NAME     : string = 'TformEditFile';
+  T_FORM_CREATE_FILE_NAME   : string = 'TformCreateFile';
+
+implementation
+
+end.
