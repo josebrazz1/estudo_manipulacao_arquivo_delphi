@@ -149,7 +149,10 @@ var
   formDefaultfolder : TformDefaultFolder;
   iniFile : TIniFile;
 begin
-  {Abre ou cria o arquivo ini}
+  {Habilita para mostrar vazamentos de memória quando o programa for encerrado}
+  ReportMemoryLeaksOnShutdown := True;
+
+  {Instancia o arquivo ini em memória}
   iniFile := TIniFile.Create(ExtractFilePath(ParamStr(0)) + INI_FILE_NAME);
 
   {Lê as definições de inicialização contidas no arquivo ini e alimenta as variáveis
@@ -173,6 +176,8 @@ begin
   {Define o tamanho de fonte padrão}
   cbFontSize.ItemIndex := cbFontSize.Items.IndexOf(IntToStr(gDefaultFontSize));
   richTxt.Font.Size := StrToInt(cbFontSize.Items[cbFontSize.ItemIndex]);
+
+  FreeAndNil(iniFile);
 end;
 
 procedure TformEditFile.richTxtSelectionChange(Sender: TObject);

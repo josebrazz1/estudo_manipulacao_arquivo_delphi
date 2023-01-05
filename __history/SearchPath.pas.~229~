@@ -55,7 +55,7 @@ var
 begin
   if Owner.ToString = T_FORM_CREATE_FILE_NAME then
   begin
-    (Owner.FindComponent('txtPath') as TEdit).Text := txtFullPath.Text;
+    (Owner.FindComponent('txtFilePath') as TEdit).Text := txtFullPath.Text;
 
     ModalResult := mrOk;
 
@@ -80,9 +80,7 @@ begin
       (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
       (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;
       (Owner.FindComponent('btnNew') as TButton).Visible := False;
-      //(Owner.FindComponent('lblFileToUpdatePath') as TLabel).Caption := txtFullPath.Text;
-      //(Owner.FindComponent('lblFileOpened') as TLabel).Visible := True;
-      (Owner as TForm).Caption := ;
+      (Owner as TForm).Caption := txtFullPath.Text;
 
       ModalResult := mrOk;
       Release;
@@ -93,6 +91,13 @@ begin
                   'Motivo: ' + e.Message);
     end;
     CloseFile(loadedFile);
+  end
+  else if Owner.ToString = T_FORM_DEFAULT_FOLDER_NAME then
+  begin
+    (Owner.FindComponent('txtDefaultFolder') as TEdit).Text := txtFullPath.Text;
+
+    ModalResult := mrOk;
+    Release;
   end;
 end;
 
@@ -143,8 +148,7 @@ try
       (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
       (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;
       (Owner.FindComponent('btnNew') as TButton).Visible := False;
-      (Owner.FindComponent('lblFileToUpdatePath') as TLabel).Caption := txtFullPath.Text;
-      (Owner.FindComponent('lblFileOpened') as TLabel).Visible := True;
+      (Owner as TForm).Caption := txtFullPath.Text;
 
       ModalResult := mrOk;
       Release;
@@ -173,12 +177,11 @@ end;
 procedure TformSearchPath.FormCreate(Sender: TObject);
 begin
   if Owner.ToString = T_FORM_CREATE_FILE_NAME then
-  begin
-    flLB.Visible := False;
-    //dirLBFilePath.Width := 468;
-  end
+    flLB.Visible := False
   else if Owner.ToString = T_FORM_EDIT_FILE_NAME then
-    flLB.Visible := True;
+    flLB.Visible := True
+  else if Owner.ToString = T_FORM_DEFAULT_FOLDER_NAME then
+    flLB.Visible := False
 end;
 
 end.

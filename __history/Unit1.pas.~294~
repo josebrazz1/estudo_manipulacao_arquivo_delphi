@@ -149,6 +149,8 @@ var
   formDefaultfolder : TformDefaultFolder;
   iniFile : TIniFile;
 begin
+  ReportMemoryLeaksOnShutdown := True;
+
   {Abre ou cria o arquivo ini}
   iniFile := TIniFile.Create(ExtractFilePath(ParamStr(0)) + INI_FILE_NAME);
 
@@ -173,12 +175,29 @@ begin
   {Define o tamanho de fonte padrão}
   cbFontSize.ItemIndex := cbFontSize.Items.IndexOf(IntToStr(gDefaultFontSize));
   richTxt.Font.Size := StrToInt(cbFontSize.Items[cbFontSize.ItemIndex]);
+
+  FreeAndNil(iniFile);
 end;
 
 procedure TformEditFile.richTxtSelectionChange(Sender: TObject);
 begin
+  {Verifica o estilo do texto selecionado e atualiza  o estado dos botões}
   if fsBold in richTxt.SelAttributes.Style then
-    btnBold.Font.Style := btnBold.Font.Style + [fsBold];
+    btnBold.Font.Style := btnBold.Font.Style + [fsBold]
+  else
+    btnBold.Font.Style := btnBold.Font.Style - [fsBold];
+
+  if fsItalic in richTxt.SelAttributes.Style then
+    btnItalic.Font.Style := btnItalic.Font.Style + [fsItalic]
+  else
+    btnItalic.Font.Style := btnItalic.Font.Style - [fsItalic];
+
+  if fsUnderline in richTxt.SelAttributes.Style then
+    btnUnderline.Font.Style := btnUnderline.Font.Style + [fsUnderline]
+  else
+    btnUnderline.Font.Style := btnUnderline.Font.Style - [fsUnderline];
+
+
 end;
 
 procedure TformEditFile.btnBoldClick(Sender: TObject);

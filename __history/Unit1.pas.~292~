@@ -177,10 +177,23 @@ end;
 
 procedure TformEditFile.richTxtSelectionChange(Sender: TObject);
 begin
+  {Verifica o estilo do texto selecionado e atualiza  o estado dos botões}
   if fsBold in richTxt.SelAttributes.Style then
     btnBold.Font.Style := btnBold.Font.Style + [fsBold]
   else
     btnBold.Font.Style := btnBold.Font.Style - [fsBold];
+
+  if fsItalic in richTxt.SelAttributes.Style then
+    btnItalic.Font.Style := btnItalic.Font.Style + [fsItalic]
+  else
+    btnItalic.Font.Style := btnItalic.Font.Style - [fsItalic];
+
+  if fsUnderline in richTxt.SelAttributes.Style then
+    btnUnderline.Font.Style := btnUnderline.Font.Style + [fsUnderline]
+  else
+    btnUnderline.Font.Style := btnUnderline.Font.Style - [fsUnderline];
+
+
 end;
 
 procedure TformEditFile.btnBoldClick(Sender: TObject);

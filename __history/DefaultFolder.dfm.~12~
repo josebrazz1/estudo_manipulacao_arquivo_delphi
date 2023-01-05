@@ -37,7 +37,7 @@ object formDefaultFolder: TformDefaultFolder
   end
   object btnOk: TButton
     Left = 8
-    Top = 115
+    Top = 116
     Width = 75
     Height = 25
     Caption = 'Ok'

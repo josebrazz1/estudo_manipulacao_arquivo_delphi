@@ -99,6 +99,8 @@ begin
     ModalResult := mrOk;
     Release;
   end;
+
+  FreeAndNil(formattedText);
 end;
 
 procedure TformSearchPath.dirLBFilePathChange(Sender: TObject);
@@ -132,33 +134,34 @@ var
   formattedText : TStringStream;
 begin
 try
-      AssignFile(loadedFile, txtFullPath.Text);
-      Reset(loadedFile);
+    AssignFile(loadedFile, txtFullPath.Text);
+    Reset(loadedFile);
 
-      while not Eof(loadedFile) do
-      begin
-        Readln(loadedFile, loadedFileLine);
+    while not Eof(loadedFile) do
+    begin
+      Readln(loadedFile, loadedFileLine);
 
-        loadedFileContent := loadedFileContent + loadedFileLine + #13#10;
-      end;
-
-      formattedText := TStringStream.Create(loadedFileContent);
-
-      //(Owner.FindComponent('richTxt') as TRichEdit).Lines.Text := loadedFileContent;
-      (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
-      (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;
-      (Owner.FindComponent('btnNew') as TButton).Visible := False;
-      (Owner as TForm).Caption := txtFullPath.Text;
-
-      ModalResult := mrOk;
-      Release;
-    except on E : Exception do
-      ShowMessage(NOT_ABLE_TO_OPEN_FILE +
-                  #13#10 +
-                  #13#10 +
-                  'Motivo: ' + e.Message);
+      loadedFileContent := loadedFileContent + loadedFileLine + #13#10;
     end;
-    CloseFile(loadedFile);
+
+    formattedText := TStringStream.Create(loadedFileContent);
+
+    //(Owner.FindComponent('richTxt') as TRichEdit).Lines.Text := loadedFileContent;
+    (Owner.FindComponent('richTxt') as TRichEdit).Lines.LoadFromFile(txtFullPath.Text);
+    (Owner.FindComponent('btnUpdtSave') as TButton).Visible := True;
+    (Owner.FindComponent('btnNew') as TButton).Visible := False;
+    (Owner as TForm).Caption := txtFullPath.Text;
+
+    ModalResult := mrOk;
+    Release;
+  except on E : Exception do
+    ShowMessage(NOT_ABLE_TO_OPEN_FILE +
+                #13#10 +
+                #13#10 +
+                'Motivo: ' + e.Message);
+  end;
+  CloseFile(loadedFile);
+  FreeAndNil(formattedText);
 end;
 
 procedure TformSearchPath.flLBMouseEnter(Sender: TObject);

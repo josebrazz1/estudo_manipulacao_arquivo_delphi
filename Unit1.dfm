@@ -28,7 +28,6 @@ object formEditFile: TformEditFile
     TabOrder = 0
     OnClick = btnOpenClick
     OnMouseEnter = btnOpenMouseEnter
-    ExplicitLeft = 394
   end
   object btnCancel: TButton
     Left = 639
@@ -39,7 +38,6 @@ object formEditFile: TformEditFile
     Caption = 'Cancelar'
     TabOrder = 1
     OnClick = btnCancelClick
-    ExplicitLeft = 475
   end
   object btnNew: TButton
     Left = 8

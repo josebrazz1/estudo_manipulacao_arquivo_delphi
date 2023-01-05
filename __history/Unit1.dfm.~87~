@@ -64,7 +64,7 @@ object formEditFile: TformEditFile
   end
   object btnCloseFile: TButton
     Left = 689
-    Top = 9
+    Top = 34
     Width = 25
     Height = 25
     Anchors = [akTop, akRight]
@@ -78,7 +78,6 @@ object formEditFile: TformEditFile
     TabOrder = 4
     OnClick = btnCloseFileClick
     OnMouseEnter = btnCloseFileMouseEnter
-    ExplicitLeft = 525
   end
   object richTxt: TRichEdit
     Left = 8
@@ -95,10 +94,11 @@ object formEditFile: TformEditFile
     ScrollBars = ssBoth
     TabOrder = 5
     Zoom = 100
+    OnSelectionChange = richTxtSelectionChange
   end
   object btnBold: TButton
     Left = 70
-    Top = 35
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'N'
@@ -128,7 +128,7 @@ object formEditFile: TformEditFile
   end
   object btnItalic: TButton
     Left = 8
-    Top = 35
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'I'
@@ -143,7 +143,7 @@ object formEditFile: TformEditFile
   end
   object cbColor: TColorBox
     Left = 101
-    Top = 37
+    Top = 36
     Width = 100
     Height = 22
     TabOrder = 9
@@ -160,9 +160,10 @@ object formEditFile: TformEditFile
   object cbFontSize: TComboBox
     Left = 101
     Top = 8
-    Width = 50
+    Width = 52
     Height = 21
     TabOrder = 11
+    OnChange = cbFontSizeChange
     Items.Strings = (
       '8'
       '9'
