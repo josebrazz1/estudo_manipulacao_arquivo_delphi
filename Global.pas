@@ -40,6 +40,16 @@ const
   {Nome de arquivo INI}
   INI_FILE_NAME               : string = 'InitializationFile.ini';
 
+  DELPHI_RESERVED_WORDS : array of string =
+    ['AND','ARRAY','AS','ASM','BEGIN','CASE','CLASS','CONST','CONSTRUCTOR',
+     'DESTRUCTOR', 'DISPINTERFACE','DIV','DO','DOWNTO','ELSE','END','EXCEPT','EXPORTS',
+     'FILE','FINALIZATION','FINALLY','FOR','FUNCTION','GOTO','IF','IMPLEMENTATION','IN',
+     'INHERITED','INITIALIZATION','INLINE','INTERFACE','IS','LABEL','LIBRARY','MOD','NIL',
+     'NOT','OBJECT','OF','OR','OUT','PACKED','PROCEDURE','PROGRAM','PROPERTY',
+     'RAISE','RECORD','REPEAT','RESOURCESTRING','SET','SHL','SHR','STRING','THEN',
+     'THREDVAR','TO','TRY','TYPE','UNIT','UNTIL','USES','VAR','WHILE',
+     'WITH','XOR'];
+
 implementation
 
 end.

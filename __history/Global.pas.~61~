@@ -3,7 +3,13 @@ unit Global;
 interface
 
 var
-  globDefaultFolder : string;
+  //Variáveis globais do arquivo "InitializationFile.ini"
+  //[application_default_folder]
+  gDefaultFolder : string;
+  gDontShowAgain : Boolean;
+  //[text_editor_properties]
+  gDefaultFont      : string;
+  gDefaultFontSize  : Integer;
 
 const
   {Mensagens}
@@ -30,6 +36,12 @@ const
   T_FORM_EDIT_FILE_NAME       : string = 'TformEditFile';
   T_FORM_CREATE_FILE_NAME     : string = 'TformCreateFile';
   T_FORM_DEFAULT_FOLDER_NAME  : string = 'TformDefaultFolder';
+
+  {Nome de arquivo INI}
+  INI_FILE_NAME               : string = 'InitializationFile.ini';
+
+  DELPHI_RESERVED_WORDS : array of string =
+    ['and','ARRAY', 'AS'];
 
 implementation
 

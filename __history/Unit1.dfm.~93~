@@ -28,7 +28,6 @@ object formEditFile: TformEditFile
     TabOrder = 0
     OnClick = btnOpenClick
     OnMouseEnter = btnOpenMouseEnter
-    ExplicitLeft = 394
   end
   object btnCancel: TButton
     Left = 639
@@ -39,7 +38,6 @@ object formEditFile: TformEditFile
     Caption = 'Cancelar'
     TabOrder = 1
     OnClick = btnCancelClick
-    ExplicitLeft = 475
   end
   object btnNew: TButton
     Left = 8
@@ -81,9 +79,10 @@ object formEditFile: TformEditFile
   end
   object richTxt: TRichEdit
     Left = 8
-    Top = 66
+    Top = 64
     Width = 706
     Height = 316
+    TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -94,11 +93,12 @@ object formEditFile: TformEditFile
     ScrollBars = ssBoth
     TabOrder = 5
     Zoom = 100
-    OnGesture = richTxtGesture
+    OnKeyDown = richTxtKeyDown
+    OnSelectionChange = richTxtSelectionChange
   end
   object btnBold: TButton
     Left = 70
-    Top = 35
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'N'
@@ -128,7 +128,7 @@ object formEditFile: TformEditFile
   end
   object btnItalic: TButton
     Left = 8
-    Top = 35
+    Top = 34
     Width = 25
     Height = 25
     Caption = 'I'
@@ -143,7 +143,7 @@ object formEditFile: TformEditFile
   end
   object cbColor: TColorBox
     Left = 101
-    Top = 37
+    Top = 36
     Width = 100
     Height = 22
     TabOrder = 9
@@ -160,7 +160,7 @@ object formEditFile: TformEditFile
   object cbFontSize: TComboBox
     Left = 101
     Top = 8
-    Width = 50
+    Width = 52
     Height = 21
     TabOrder = 11
     OnChange = cbFontSizeChange
@@ -181,5 +181,10 @@ object formEditFile: TformEditFile
       '36'
       '48'
       '72')
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnMessage = ApplicationEvents1Message
+    Left = 640
+    Top = 72
   end
 end

@@ -79,9 +79,10 @@ object formEditFile: TformEditFile
   end
   object richTxt: TRichEdit
     Left = 8
-    Top = 65
+    Top = 64
     Width = 706
     Height = 316
+    TabStop = False
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -92,6 +93,7 @@ object formEditFile: TformEditFile
     ScrollBars = ssBoth
     TabOrder = 5
     Zoom = 100
+    OnKeyDown = richTxtKeyDown
     OnSelectionChange = richTxtSelectionChange
   end
   object btnBold: TButton
@@ -179,5 +181,23 @@ object formEditFile: TformEditFile
       '36'
       '48'
       '72')
+  end
+  object cbLanguage: TComboBox
+    Left = 207
+    Top = 37
+    Width = 100
+    Height = 21
+    ItemIndex = 0
+    TabOrder = 12
+    Text = 'Linguagem'
+    OnChange = cbLanguageChange
+    Items.Strings = (
+      'Linguagem'
+      'Delphi')
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnMessage = ApplicationEvents1Message
+    Left = 640
+    Top = 72
   end
 end

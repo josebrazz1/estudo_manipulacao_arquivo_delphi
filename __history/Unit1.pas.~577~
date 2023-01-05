@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, JvBaseDlg, JvJVCLAboutForm, Vcl.StdCtrls, inifiles,
-  Vcl.ComCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+  Vcl.ComCtrls, Vcl.Buttons, Vcl.ExtCtrls, Vcl.AppEvnts, System.Generics.Collections;
 
 type
   TformEditFile = class(TForm)
@@ -21,6 +21,8 @@ type
     cbColor: TColorBox;
     cbFont: TComboBox;
     cbFontSize: TComboBox;
+    ApplicationEvents1: TApplicationEvents;
+    cbLanguage: TComboBox;
     procedure btnOpenClick(Sender: TObject);
     procedure btnNewClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
@@ -36,6 +38,13 @@ type
     procedure cbFontChange(Sender: TObject);
     procedure cbFontSizeChange(Sender: TObject);
     procedure richTxtSelectionChange(Sender: TObject);
+    procedure richTxtKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure ApplicationEvents1Message(var Msg: tagMSG; var Handled: Boolean);
+    procedure FindTextAndSelect(text : string);
+    procedure FindLanguageReservedWords(text : array of string);
+    procedure FindCommentsInText(commBegin, commEnd : string);
+    procedure cbLanguageChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -144,14 +153,139 @@ begin
   richTxt.SelAttributes.Size := StrToInt(cbFontSize.Items[cbFontSize.ItemIndex]);
 end;
 
+procedure TformEditFile.cbLanguageChange(Sender: TObject);
+begin
+  if cbLanguage.Text = 'Delphi' then
+  begin
+    FindLanguageReservedWords(DELPHI_RESERVED_WORDS);
+    FindCommentsInText('{','}');
+  end;
+end;
+
+procedure TformEditFile.FindLanguageReservedWords(text: array of string);
+var
+  i, startPos, endPos, pos : Integer;
+begin
+  {Evita o delay na pesquisa pela palavra}
+  richTxt.Lines.BeginUpdate;
+
+  {Pesquisa palavras correspondentes para cada posição do array}
+  for i := 0 to length(DELPHI_RESERVED_WORDS) - 1 do
+  begin
+    {Início do texto}
+    startPos := 0;
+
+    {A posição final recebe o Length (tamanho total) do texto contido no RichEdit}
+    endPos := Length(richTxt.Text);
+
+    {Enquanto existir textos correspondentes ao da pesquisa}
+    while (richTxt.FindText(DELPHI_RESERVED_WORDS[i], startPos, endPos, [stWholeWord]) <> -1) do
+    begin
+      endPos := Length(richTxt.Text) - startPos;
+      pos := richTxt.FindText(DELPHI_RESERVED_WORDS[i], startPos, endPos, [stWholeWord]);
+      Inc(startPos, length(DELPHI_RESERVED_WORDS[i]));
+      {Seleciona o texto correspondente}
+      richTxt.SelStart := pos;
+      richTxt.SelLength := Length(DELPHI_RESERVED_WORDS[i]);
+      {Altera a cor do texto correspondente, bem como o altera para negrito}
+      richTxt.SelAttributes.Color := clBlue;
+      richTxt.SelAttributes.Style := richTxt.SelAttributes.Style + [fsBold];
+    end;
+  end;
+  richTxt.Lines.EndUpdate;
+end;
+
+procedure TformEditFile.FindCommentsInText(commBegin, commEnd : string);
+var
+  i, commCount, posCommBegin, posCommEnd, startPos, endPos, pos : Integer;
+  startPosList : TList<Integer>;
+begin
+
+  startPosList := TList<Integer>.Create;
+
+  startPos := 0;
+  endPos := Length(richTxt.Text);
+
+  commCount := 0;
+  while (richTxt.FindText(commBegin, startPos, endPos, []) <> -1) do
+  begin
+    startPos := richTxt.FindText(commBegin, startPos, endPos, []);
+    startPosList.Add(startPos);
+    commCount := commCount + 1;
+    Inc(startPos);
+  end;
+
+  {Evita o delay na pesquisa pela palavra}
+  richTxt.Lines.BeginUpdate;
+
+  for i := 0 to startPosList.Count - 1 do
+  begin
+    //ShowMessage(IntToStr(startPosList.Items[i]));
+
+    startPos := startPosList.Items[i];
+
+    {A posição final recebe o Length (tamanho total) do texto contido no RichEdit}
+    endPos := Length(richTxt.Text);
+
+    {Enquanto existir textos correspondentes ao da pesquisa e ainda não estiverem comentados}
+    while (richTxt.FindText(commBegin, startPos, endPos, []) <> -1) and
+      (richTxt.SelAttributes.Color <> clGreen) do
+    begin
+      endPos := Length(richTxt.Text) - startPosList.Items[i];
+      posCommBegin := richTxt.FindText(commBegin, startPos, endPos, []);
+      posCommEnd := richTxt.FindText(commEnd, startPos, endPos, []);
+      Inc(startPos, length(commBegin));
+
+      richTxt.SelStart := posCommBegin;
+      richTxt.SelLength := (posCommEnd - posCommBegin) + 1;
+
+      richTxt.SelAttributes.Color := clGreen;
+    end;
+
+    richTxt.SelStart := 0;
+    richTxt.SelLength := 0;
+    richTxt.SelAttributes.Color := clBlack;
+  end;
+
+  richTxt.Lines.EndUpdate;
+  FreeAndNil(startPosList);
+end;
+
+procedure TformEditFile.FindTextAndSelect(text: string);
+var
+  startPos, endPos, pos : Integer;
+begin
+  startPos := 0;
+
+  {A posição final recebe o Length (tamanho total) do texto contido no RichEdit}
+  endPos := Length(richTxt.Text);
+
+  {Evita o delay na pesquisa pela palavra}
+  richTxt.Lines.BeginUpdate;
+
+  {Enquanto existir textos correspondentes ao da pesquisa}
+  while richTxt.FindText(text, startPos, endPos, [stWholeWord]) <> -1 do
+  begin
+    endPos := Length(richTxt.Text) - startPos;
+    pos := richTxt.FindText(text, startPos, endPos, [stWholeWord]);
+    Inc(startPos, length(text));
+    richTxt.SetFocus;
+    richTxt.SelStart := pos;
+    richTxt.SelLength := Length(text);
+  end;
+
+  richTxt.Lines.EndUpdate;
+end;
+
 procedure TformEditFile.FormCreate(Sender: TObject);
 var
   formDefaultfolder : TformDefaultFolder;
   iniFile : TIniFile;
 begin
+  {Habilita para mostrar vazamentos de memória quando o programa for encerrado}
   ReportMemoryLeaksOnShutdown := True;
 
-  {Abre ou cria o arquivo ini}
+  {Instancia o arquivo ini em memória}
   iniFile := TIniFile.Create(ExtractFilePath(ParamStr(0)) + INI_FILE_NAME);
 
   {Lê as definições de inicialização contidas no arquivo ini e alimenta as variáveis
@@ -175,6 +309,16 @@ begin
   {Define o tamanho de fonte padrão}
   cbFontSize.ItemIndex := cbFontSize.Items.IndexOf(IntToStr(gDefaultFontSize));
   richTxt.Font.Size := StrToInt(cbFontSize.Items[cbFontSize.ItemIndex]);
+
+  FreeAndNil(iniFile);
+end;
+
+procedure TformEditFile.richTxtKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = 9 then
+    ShowMessage('');
+
 end;
 
 procedure TformEditFile.richTxtSelectionChange(Sender: TObject);
@@ -194,8 +338,28 @@ begin
     btnUnderline.Font.Style := btnUnderline.Font.Style + [fsUnderline]
   else
     btnUnderline.Font.Style := btnUnderline.Font.Style - [fsUnderline];
+end;
 
-
+procedure TformEditFile.ApplicationEvents1Message(var Msg: tagMSG;
+  var Handled: Boolean);
+begin
+  case Msg.Message of
+    {Verifica se a tecla TAB foi pressionada.
+    Quando o foco estiver no RichEdit o tab order deve ser desconsiderado, uma
+    vez que o TAB em um editor de texto reresenta uma forma de espaçamento e deve
+    executar uma ação específica.}
+    WM_KEYDOWN:
+    begin
+      {Se a tecla apertada for o tab e o foco estiver no RichEdit...}
+      if (Msg.wParam = VK_TAB) and (ActiveControl = richTxt)
+      then
+      begin
+        {...então adiciona o tab space na posição do cursor}
+        richTxt.SelText := #9;
+        Abort;
+      end;
+    end ;
+  end;
 end;
 
 procedure TformEditFile.btnBoldClick(Sender: TObject);
@@ -209,6 +373,8 @@ begin
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style - [fsBold]
   else
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style + [fsBold];
+
+  richTxt.SetFocus;
 end;
 
 procedure TformEditFile.btnUnderlineClick(Sender: TObject);
@@ -222,6 +388,8 @@ begin
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style - [fsUnderline]
   else
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style + [fsUnderline];
+
+  richTxt.SetFocus;
 end;
 
 procedure TformEditFile.btnItalicClick(Sender: TObject);
@@ -235,6 +403,8 @@ begin
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style - [fsItalic]
   else
     richTxt.SelAttributes.Style := richTxt.SelAttributes.Style + [fsItalic];
+
+  richTxt.SetFocus;
 end;
 
 end.
